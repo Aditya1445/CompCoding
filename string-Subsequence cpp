@@ -17,6 +17,10 @@ vs gss(string s) {
 	vs mres;
 	for (string rstr : rres) {
 		mres.push_back("" + rstr);
+		
+	}
+	for (string rstr : rres) {
+		
 		mres.push_back(ch + rstr);
 	}
 
