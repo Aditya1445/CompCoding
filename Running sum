@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+
+vi runningsum(vi &nums)
+{
+	int sum = 0;
+	for(int i = 0; i<nums.size(); i++)
+	{
+		sum = sum + nums[i];
+		nums[i] = sum;
+	}
+	return nums;
+}
+
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+	int n;
+	cin >> n;
+	vi nums;
+	for(int i = 0; i<n; i++)
+	{
+		nums.push_back(i+1);
+	}
+	 
+	vi cc = runningsum(nums);
+	for(int i : cc)
+	{
+		cout << i << " ";
+	}
+	return 0;
+}
