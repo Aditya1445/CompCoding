@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> v;
+
+
+vector <bool> kidsWithCandies(v &candies, int extraCandies)
+{
+	int max = candies[0];
+	for(int i = 1; i<candies.size(); i++)
+	{
+		if(max < candies[i])
+		{
+			max = candies[i];
+		}
+	}
+	vector <bool> op;
+	for(int i = 0; i<candies.size(); i++)
+	{
+		int k = candies[i] + extraCandies;
+		if(k >= max)
+		{
+			op.push_back(true);
+		}
+		else{
+			op.push_back(false);
+		}
+	}
+	return op;
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+
+	
+	int n;
+	cin >> n;
+	v candies;
+	int extraCandies;
+	cin >> extraCandies;
+	for(int i = 0; i<n; i++)
+	{
+		candies.push_back(i+1);
+	}
+	vector<bool> ans = kidsWithCandies(candies, extraCandies);
+	for(int i = 0; i<ans.size(); i++)
+	{
+		cout << boolalpha << ans[i] << " ";
+	}
+	
+	return 0;
+}
