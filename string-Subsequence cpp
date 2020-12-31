@@ -41,7 +41,7 @@ int main() {
 
 	cout << '[';
 	for (string str : ans) {
-		if (cnt != ans.size() - 1)
+		if (cnt != ans.size() - 1) // as the last character is null character so it doesn't count.
 			cout << str << ", ";
 		else
 			cout << str;
