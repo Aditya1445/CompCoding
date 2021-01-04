@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> v;
+
+v createTargetArray(v& nums, v& idx)
+{
+	v cc;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (idx[i] < i)
+		{
+			cc.insert(cc.begin() + idx[i], nums[i]);
+		}
+		else {
+			cc.push_back(nums[i]);
+		}
+	}
+	return cc;
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+
+	v nums, idx;
+	int n;
+	cin >> n;
+	int a[n];
+	int b[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+	}
+	for (int i = 0; i < n; i++)
+	{
+		cin >> b[i];
+	}
+	for (int x : a)
+	{
+		nums.push_back(x);
+	}
+	for (int x : b)
+	{
+		idx.push_back(x);
+	}
+	v arr = createTargetArray(nums, idx);
+	for (int i : arr)
+	{
+		cout << i << " ";
+	}
+	return 0;
+}
