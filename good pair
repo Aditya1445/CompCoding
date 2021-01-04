@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> v;
+
+int numIdenticalPairs(v& nums)
+{
+	int count = 0;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		for (int j = 1; j < nums.size(); j++)
+		{
+			if ((nums[i] == nums[j]) && i < j)
+			{
+				count++;
+			}
+		}
+	}
+	return count;
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+
+	v nums;
+	int n;
+	cin >> n;
+	int a[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+	}
+	for (int x : a)
+	{
+		nums.push_back(x);
+	}
+	cout << numIdenticalPairs(nums);
+	return 0;
+}
