@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<string> vs;
+
+bool equalStrings(vs& word1, vs& word2)
+{
+	string str1, str2;
+	for(int i = 0; i < word1.size(); i++)
+	{
+		str1.append(word1[i]);
+	}
+	for(int j = 0; j<word2.size(); j++)
+	{
+		str2.append(word2[j]);
+	}
+	if(str1 == str2)
+	{
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+	vs word1, word2;
+
+	string s1, s2;
+	getline(cin,s1);
+	getline(cin,s2);
+
+	istringstream is(s1), is2(s2);
+	string word;
+	while(is >> word) word1.push_back(word);
+	while(is2 >> word) word2.push_back(word);
+	
+	/*for(string s:word1)
+		cout<<s<<endl;
+
+	for(string s:word2)
+		cout<<s<<endl;*/
+
+
+	cout << boolalpha << equalStrings(word1, word2) << endl;
+	
+	return 0;
+}
