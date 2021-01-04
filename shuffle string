@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> vs;
+
+string restoreString(string s, vs& indices)
+{
+	string res;
+	char c[indices.size()];
+	for(int i = 0; i<indices.size(); i++)
+	{
+		c[indices[i]] = s[i];
+	}
+	for(int i = 0; i<indices.size(); i++)
+	{
+		res += c[i];
+	}
+	return res;
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+	int n;
+	cin >> n;
+	vs nums;
+	int a[n];
+	for(int i = 0; i<n; i++)
+	{
+		cin >> a[i];
+	}
+	for(int x : a)
+	{
+		nums.push_back(x);
+	}
+	string s;
+	cin >> s;
+	string str = restoreString(s, nums);
+
+	for(char c : str)
+	{
+		cout << c << "";
+	}
+	return 0;
+}
