@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> v;
+
+int missing(v& arr, int k)
+{
+	int n = arr.size();
+	int l = 0, u = n - 1, m;
+
+	while (l <= u)
+	{
+		m = l + (u - l) / 2;
+		int x = arr[m] - (m + 1); // Numbers less than mid element.
+
+		if (x == k)
+		{
+			if (m > 0 && (arr[m - 1] - (m)) == k)
+			{
+				u = m - 1;
+				continue;
+			}
+			return arr[m] - 1;
+		}
+		if (x < k) // if numbers less than mid element is less than key index.
+		{
+			l = m + 1; // search on the right of the mid index.
+		}
+		else if (x > k) //  if numbers less than mid element is more than key index.
+		{
+			u = m - 1; // search on the left of mid index.
+		}
+
+	}
+	if (u < 0)
+	{
+		return k;
+	}
+	int c = arr[u] - (u + 1);
+	k -= c;
+	return arr[u] + k;
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+	int n;
+	cin >> n;
+	int a[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+	}
+	v arr;
+	for (int x : a)
+	{
+		arr.push_back(x);
+	}
+	int k;
+	cin >> k;
+
+	cout << "Missing Kth number = " << missing(arr, k) << endl;
+	return 0;
+}
