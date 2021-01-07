@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string interpret(string command)
+{
+	string str = "";
+  int i=0;
+  while(i < command.length())
+  {
+      if(command[i] == 'G')
+      {
+        str.append("G") ;
+        i++;
+      }
+      else if(command[i] == '(' && command[i+1] == ')')
+      {
+        str.append("o");
+        i +=2;
+      }
+      else if(command[i] == '(' && command[i+1] == 'a'){
+          str.append("al");
+          i += 4;
+      }
+        
+        
+          
+        
+      
+  }
+  return str;
+}
+	
+
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	string s;
+
+	cin >> s;
+
+	string res = interpret(s);
+
+	cout << res;
+
+	return 0;
+}
