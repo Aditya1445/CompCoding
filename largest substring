@@ -1,0 +1,30 @@
+// largest non repeating substring.
+#include<bits/stdc++.h>
+using namespace std;
+
+int lengthSubstring(string s)
+{
+  int n = s.length();
+  int i = 0;
+
+  int res = 0;
+  vector<int> index (256, -1);
+  for(int j = 0; j<n; j++)
+  {
+    i = max(i, index[s[j]] + 1);
+    
+    res = max(res, j-i+1);
+    index[s[j]] = j;
+    
+  }
+  
+  return res;
+}
+int main()
+{
+  string s;
+  cin >> s;
+  
+  cout << lengthSubstring(s);
+  return 0;
+}
