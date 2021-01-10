@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int jewelStones(string j, string s)
+{
+  int count = 0;
+  int n = j.size(), m = s.size();
+  map<char, bool> mp;
+  for(int i = 0; i<n; i++)
+  {
+    mp[j[i]] = true;
+  }
+  for(int j = 0; j<m; j++)
+  {
+    if(mp[s[j]])
+    {
+      count++;
+    }
+  }
+  return count;
+}
+int main()
+{
+  string s1; string s2;
+  getline(cin, s1);
+  getline(cin, s2);
+
+  cout << jewelStones(s1, s2);
+}
