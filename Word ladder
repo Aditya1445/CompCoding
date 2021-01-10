@@ -1,0 +1,68 @@
+// count the number of steps to reach the targeted word
+#include<bits/stdc++.h>
+using namespace std;
+
+// typedef vector<string> vs;
+typedef set<string> st; // for ordered storage.
+
+int ladderLength(string start, string target, st& D)
+{
+  if(D.find(target) == D.end()){
+    return 0;
+  }
+  int k = 0, wLen = start.size();
+  queue<string> Q;
+  Q.push(start);
+
+  while(!Q.empty())
+  {
+    k++;
+    int Qlen = Q.size();
+    for(int i = 0; i<Qlen; i++)
+    {
+      string w = Q.front();
+      Q.pop();
+      for(int pos = 0; pos < wLen; pos++)
+      {
+        char ch = w[pos];
+        for(char c = 'a'; c<= 'z'; c++)
+        {
+          w[pos] = c;
+          // cout << w << endl;
+          if(w == target)
+          {
+            return k+1;
+          }
+          if(D.find(w) == D.end())
+          {
+            continue;
+          }
+          D.erase(w);
+          Q.push(w);
+        }
+        w[pos] = ch; // retain the original removed character.
+      }
+      
+    }
+  }
+  return 0;
+}
+int main()
+{
+  st wordlist;
+  string dictionary;
+  getline(cin, dictionary);
+
+  istringstream is(dictionary);
+  string word;
+  while(is >> word)
+  {
+    wordlist.insert(word);
+  }
+  string start, target;
+  getline(cin, start);
+  getline(cin, target);
+
+ cout << ladderLength(start, target, wordlist);
+  
+}
