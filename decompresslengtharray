@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> vi;
+
+vi decompress(vi& num)
+{
+  vi p;
+  for(int i = 0; i<num.size(); i+=2)
+  {
+    p.insert(p.end(),num[i],num[i+1]);
+  }
+  return p;
+}
+int main()
+{
+  int n;
+  cin >> n;
+  int a[n];
+  for(int i = 0; i<n; i++)
+  {
+    cin >> a[i];
+  }
+  vi num;
+  for(int i : a)
+  {
+    num.push_back(i);
+  }
+  vi res = decompress(num);
+  for(int x : res)
+  {
+    cout << x << " ";
+  }
+}
