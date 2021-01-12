@@ -64,7 +64,7 @@ Node *addTwoNumbers(Node *s, Node *t)
       t = t->next;
     }
   }
-  if(carry > 0)
+  if(carry > 0) // if there is an extra carry
   {
     Node *newnode = new Node();
     newnode->data = carry;
