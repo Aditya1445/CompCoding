@@ -1,0 +1,121 @@
+// adding two numbers using linked list.
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+  public:
+  int data;
+  Node *next;
+};
+Node *head1;
+Node *head2;
+
+Node *getdata(Node **h, int data)
+{
+  Node *temp = new Node();
+  Node *t = *h;
+  temp->data = data;
+  temp->next = NULL;
+  if(*h == NULL)
+  {
+    *h = temp;
+     t = temp;
+  }
+  else{
+    while(t != NULL)
+    {
+      if(t->next == NULL)
+      {
+        t->next = temp;
+        t = t->next;
+      }
+      t = t->next;
+    }
+  }
+  return *h;
+}
+Node *addTwoNumbers(Node *s, Node *t)
+{
+  Node *temp, *prev = NULL;
+  Node *res = NULL;
+  int sum , carry = 0;
+  while(s != NULL || t != NULL)
+  {
+    sum = carry + (s ? s->data : 0) + (t ? t->data : 0);
+
+    carry = (sum>=10) ? 1 : 0;
+    sum = sum % 10;
+    temp = new Node();
+    temp->data = sum;
+    temp->next = NULL;
+    if(res == NULL)
+    {
+      res = temp;
+    }
+    else{
+      prev->next = temp;
+    }
+    prev = temp;
+    if(s)
+    {
+      s= s->next;
+    }
+    if(t)
+    {
+      t = t->next;
+    }
+  }
+  if(carry > 0)
+  {
+    Node *newnode = new Node();
+    newnode->data = carry;
+    newnode->next = NULL;
+    temp->next = newnode;
+  }
+  return res;
+}
+void displaylist(Node *h)
+{
+  if(h == NULL)
+  {
+    cout << "List is empty" << endl;
+  }
+  int n = 1;
+  Node *x = h;
+  while(x != NULL)
+  {
+    cout << "Data in the node " << n << " : " << x->data << endl;
+    n++;
+    x = x->next;
+  }
+}
+int main()
+{
+  int n;
+  cin >> n;
+  int m, data;
+  cin >> m;
+  cout << "Initialize data in every node of list 1" << endl;
+  for(int i = 0; i<n; i++)
+  {
+    cout << "Enter the data in node " << i+1 << " : ";
+    cin >> data;
+    getdata(&head1, data);
+  }
+  cout << "Initialize data in every node of list 2" << endl;
+  for(int j = 0; j<m; j++)
+  {
+    cout << "Enter the data in node " << j+1 << " : ";
+    cin >> data;
+    getdata(&head2, data);
+  }
+  /*cout << "Data in the list 1" << endl;
+  displaylist(head1);
+
+  cout << "Data in the list 2" << endl;
+  displaylist(head2);*/
+
+  Node *res = NULL;
+  res = addTwoNumbers(head1, head2);
+  cout << "Data in the modified list" << endl;
+  displaylist(res);
+}
