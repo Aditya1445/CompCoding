@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<string> vs;
+int countstrings(string allowed, vs& words)
+{
+  int count = 0;
+  unordered_set<char> s;
+  for(int i = 0; i<allowed.size(); i++)
+  {
+    s.insert(allowed[i]); // storing the string for which the searching will be done in word vector of strings
+  }
+  for(int i = 0; i<words.size(); i++) // this one will go till the end of vector of strings.
+  {
+      bool ans = false; // initially no strings are assumed to be found
+      for(int j = 0; j<words[i].size(); j++) // this one will go to the end of particular word.
+      {
+        if(s.find(words[i][j]) != s.end()){ // if thw found word is relatable then set bool to true and incremnet the count
+          ans = true;
+        }
+        else{
+          ans = false; // else set bool to false and break the loop.
+          break;
+        }
+      }
+      if(ans == true)
+      {
+        count++;
+      }
+  }
+  return count;
+}
+int main()
+{
+  vs words;
+  string s1;
+  getline(cin, s1);
+
+  string s2;
+  getline(cin, s2);
+  stringstream str(s1);
+  string word;
+  while(str >> word)
+  {
+    words.push_back(word);
+  }
+  cout << countstrings(s2, words) << endl;
+  return 0;
+}
