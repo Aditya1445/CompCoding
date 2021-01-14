@@ -1,0 +1,48 @@
+// minimum operation to reduce x to 0;
+// All we have to do is calculate the total sum of array and then subtract it with a given number X and store it in a variable(say subSum).
+// then calculate the length of the subarray that can give the resultant value. 
+// and return the length if the the subSum is equal to the sum of the elements of subarray else return -1.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> vi;
+int minOperations(vi &nums, int x)
+{
+  int maxLen = -1;
+  int sum = accumulate(nums.begin(), nums.end(), 0);
+  int subSum = sum - x;
+  int l = 0, r = 0;
+  for(int i = 0; i<nums.size(); i++)
+  {
+    l += nums[i];
+    while(r <=i && l > subSum)
+    {
+      l -= nums[r];
+      r++;
+    }
+    if(l == subSum)
+    {
+      maxLen = max(maxLen, i-r+1);
+    }
+  }
+  return(maxLen != -1) ? nums.size()-maxLen : -1;
+}
+int main()
+{
+  vi nums;
+  int n;
+  cin >> n;
+  int a[n];
+  for(int i = 0; i<n; i++)
+  {
+    cin >> a[i];
+  }
+  for(int x : a)
+  {
+    nums.push_back(x);
+  }
+  int x;
+  cin >> x;
+  cout << minOperations(nums, x);
+}
