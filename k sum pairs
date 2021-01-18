@@ -1,0 +1,45 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/581/week-3-january-15th-january-21st/3608/
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> vi;
+int maxOperations(vi& nums, int k)
+{
+	unordered_map<int, int> mp;
+	int count = 0;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (mp[k - nums[i]] > 0)
+		{
+			mp[k - nums[i]]--;
+			count++;
+		}
+		else {
+			mp[nums[i]]++;
+		}
+	}
+	return count;
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+	int n;
+	cin >> n;
+	int a[n];
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a[i];
+	}
+	vi nums;
+	for (int i : a)
+	{
+		nums.push_back(i);
+	}
+	int k;
+	cin >> k;
+	cout << maxOperations(nums, k);
+	return 0;
+}
