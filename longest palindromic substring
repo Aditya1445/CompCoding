@@ -1,0 +1,54 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/581/week-3-january-15th-january-21st/3609/
+#include<bits/stdc++.h>
+using namespace std;
+string longestPalindrome(string str)
+{
+	int maxLength = 1;
+
+	int start = 0;
+	int len = str.size();
+
+	int low, high;
+
+
+	for (int i = 1; i < len; ++i) { // centre points are i-1 and i for longest substring of even length.
+
+		low = i - 1;
+		high = i;
+		while (low >= 0 && high < len
+		        && str[low] == str[high]) {
+			if (high - low + 1 > maxLength) {
+				start = low;
+				maxLength = high - low + 1;
+			}
+			low--;
+			high++;
+		}
+
+
+		low = i - 1 // centre points are i-1 and i+1 for longest substring of odd length.
+		high = i + 1;
+		while (low >= 0 && high < len
+		        && str[low] == str[high]) {
+			if (high - low + 1 > maxLength) {
+				start = low;
+				maxLength = high - low + 1;
+			}
+			low--;
+			high++;
+		}
+	}
+	return str.substr(start, maxLength);
+}
+int main() {
+	ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#ifndef ONLINE_JUDGE
+	freopen("input1.txt", "r", stdin);
+	freopen("output1.txt", "w", stdout);
+#endif
+	string s;
+	getline(cin, s);
+
+	cout << longestPalindrome(s);
+	return 0;
+}
