@@ -1,0 +1,34 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/581/week-3-january-15th-january-21st/3610/
+
+#include<bits/stdc++.h>
+using namespace std;
+bool isValid(string s)
+{
+  vector<char> vc;
+  for(int i = 0; i<s.size(); i++)
+  {
+    if(s[i] == '('){
+      vc.push_back(')');
+    }
+    else if(s[i] == '{')
+    {
+      vc.push_back('}');
+    }
+    else if(s[i] == '['){
+      vc.push_back(']');
+    }
+    else{
+      if((vc.empty()) || s[i] != vc[vc.size() - 1]){
+        return false;
+      }
+      vc.pop_back();
+    }
+  }
+  return vc.empty();
+}
+int main()
+{
+  string s;
+  getline(cin, s);
+  cout << isValid(s);
+}
