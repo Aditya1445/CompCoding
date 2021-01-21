@@ -1,0 +1,38 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/581/week-3-january-15th-january-21st/3611/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+
+vi mostCompetitive(vi& nums, int k){
+  int n = nums.size();
+        int x = nums.size() - k;
+        vi a;
+        for(int i = 0; i<n; i++)
+        {
+            while(!a.empty() && x && nums[i] < a.back()){
+                x--;
+                a.pop_back();
+            }
+            a.push_back(nums[i]);
+        }
+        a.resize(k);
+        return a;
+}
+int main(){
+  int n;
+  cin >> n;
+  int a[n];
+  for(int i = 0; i<n; i++)
+  {
+    cin >> a[i];
+  }
+  vi nums;
+  for(int i : a){
+    nums.push_back(i);
+  }
+  int k;
+  cin >> k;
+  vi res = mostCompetitive(nums, k);
+  for(int x : res){
+    cout << x << " ";
+  }
