@@ -1,0 +1,31 @@
+// Check if each character of both strings are same and also their frequency.
+#include<bits/stdc++.h>
+using namespace std;
+
+bool closeString(string s1, string s2){
+  /*if(s1.size() != s2.size()){
+    return 0;
+  }*/
+  set<char> str1, str2; // f1 and f2 are frequency of characters of strings s1 and s2.
+  vector<int> f1(26,0), f2(26,0);
+  for(char i : s1){
+    str1.insert(i);
+    f1[i-'a']++;
+  }
+  for(char x : s2){
+    str2.insert(x);
+    f2[x-'a']++;
+  }
+  sort(f1.begin(), f1.end());
+  sort(f2.begin(), f2.end());
+
+  return str1 == str2 && f1 == f2;
+}
+int main()
+{
+  string s1, s2;
+  getline(cin, s1);
+  getline(cin, s2);
+
+  cout << boolalpha << closeString(s1,s2);
+}
