@@ -1,0 +1,71 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/582/week-4-january-22nd-january-28th/3614/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
+
+vvi diagonalSort(vvi& mat){
+  int i, j = 0, k = 0;
+  int n = mat.size();
+  int m = mat[0].size();
+
+  for(i = 0; j<m; j++){
+    vi v;
+    k = 0;
+    while(i + k < n && j + k < m){
+      v.push_back(mat[i+k][j+k]);
+      k++;
+    }
+    sort(v.begin(), v.end());
+    k = 0;
+    while(k < v.size()){
+      mat[i+k][j+k] = v[k];
+      k++;
+    }
+  }
+  i = 1;
+  for(j = 0; i<n; i++){
+    vi v;
+    k = 0;
+    while(i + k < n && j+k < m){
+      v.push_back(mat[i+k][j+k]);
+      k++;
+    }
+    sort(v.begin(), v.end());
+    k = 0;
+    while(k < v.size()){
+      mat[i+k][j+k] = v[k];
+      k++;
+    }
+  }
+  return mat;
+}
+int main(){
+  int m, n, num;
+  cin >> m >> n;
+  vvi vec;
+  for(int i=0; i<m; i++)
+  { vi mvec;
+    for(int j=0; j<n; j++){
+      cin>>num;
+      mvec.push_back(num);
+    }
+    vec.push_back(mvec);
+  }
+  for(auto x:vec)
+  {
+    for(int z:x){
+      cout<<z<<" ";
+    }
+    cout<<endl;
+  }
+  
+  vvi res = diagonalSort(vec);
+  for(auto x:res)
+  {
+    for(int z:x){
+      cout<<z<<" ";
+    }
+    cout<<endl;
+  }
+}
