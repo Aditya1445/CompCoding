@@ -1,0 +1,80 @@
+// list [1->2->3->4->5->NULL] k = 2
+//resultant list [1->4->3->2->5]
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+ public:
+  int data;
+  Node *next;
+};
+Node *head;
+Node *createlist(int n){
+  int data;
+  Node *temp, *newnode;
+  cout << "Enter the data in node 1 : ";
+  cin >> data;
+  temp = new Node();
+  temp->data = data;
+  temp->next = NULL;
+  head = temp;
+  for(int i = 2; i<=n; i++){
+    newnode = new Node();
+    cout << "Enter the data in node " << i << " : ";
+    cin >> data;
+    newnode->data = data;
+    newnode->next = NULL;
+    temp->next = newnode;
+    temp = temp->next;
+  }
+  return head;
+}
+Node *swapNodes(Node *head, int k){
+  Node *temp = head;
+  int len = 0;
+  while(temp!=NULL){
+    temp = temp->next;
+    len++;
+  }
+  temp = head;
+  len -= k;
+  Node *node1 = head;
+  Node *node2 = head;
+  while((k>-1 || len > -1) && temp){
+    if(k == 1){
+      node1 = temp;
+    }
+    if(len == 0){
+      node2 = temp;
+    }
+    temp = temp->next;
+    k--;len--;
+  }
+  swap(node1->data, node2->data);
+  return head;
+}
+void displaylist(Node *h){
+  if(h == NULL){
+    cout << "List is empty" << endl;
+  }
+  int n = 1;
+  Node *x = h;
+  while(x != NULL){
+    cout << "Data in node " << n << " : " << x->data << endl;
+    n++;
+    x = x->next;
+  }
+}
+int main(){
+  int n;
+  cin >> n;
+  createlist(n);
+
+  cout << "Data in the list" << endl;
+  displaylist(head);
+
+  int k;
+  cin >> k;
+  Node *res = swapNodes(head, k);
+  cout << "Data in the modified list" << endl;
+  displaylist(res);
+}
