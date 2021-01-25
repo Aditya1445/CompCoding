@@ -1,0 +1,33 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/582/week-4-january-22nd-january-28th/3616/
+// check if all the 1 in vector are k length apart.
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+
+bool kLengthapart(vi& num, int k){
+  int count = k;
+  for(auto i : num){
+    if(i == 1){
+      if(count < k){
+        return false;
+      }
+      count = 0;
+    }
+    else{
+      count ++;
+    }
+  }
+  return true;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vi num;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    num.push_back(data);
+  }
+  int k;
+  cin >> k;
+  cout << boolalpha << kLengthapart(num, k);
+}
