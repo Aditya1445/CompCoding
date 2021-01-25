@@ -1,0 +1,47 @@
+https://leetcode.com/problems/cells-with-odd-values-in-a-matrix/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<vector<int>> vvi;
+typedef vector<int> vi;
+
+int oddCells(int n, int m, vvi& indices){
+  vvi v(n, vi(m,0));
+  for(int i = 0; i<indices.size(); i++){
+    int row = indices[i][0];
+    int col = indices[i][1];
+    for(int j = 0; j<n; j++){
+      v[j][col]++;
+    }
+    for(int k = 0; k<m; k++){
+      v[row][k]++;
+    }
+  }
+  int count = 0;
+  for(int i = 0; i<n; i++){
+    for(int j = 0; j<m; j++){
+      if(v[i][j] %2 == 1){
+        count++;
+      }
+    }
+  }
+  return count;
+
+
+}
+int main(){
+  int n; int m;
+  cin >> n >> m;
+  int s,r;
+  cin >> s >> r;
+  int data;
+  vvi indices;
+  for(int i = 0; i<s; i++){
+    vi vec;
+    for(int j = 0; j<r; j++){
+      cin >> data;
+      vec.push_back(data);
+    }
+    indices.push_back(vec);
+  }
+  cout << oddCells(n, m, indices);
+}
