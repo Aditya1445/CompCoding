@@ -1,0 +1,23 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/582/week-4-january-22nd-january-28th/3618/
+#include<bits/stdc++.h>
+using namespace std;
+
+int concatenate(int n){
+    long long res = 0;
+        int mod = 1e9 + 7, c= 1;
+        for(int i = 1; i<=n; i++){
+            if(!(i & (i - 1)))
+            {
+                c *= 2;
+            }
+            res*=c;
+            res%=mod;
+            res+=i;
+        }
+        return res;
+}
+int main(){
+  int n;
+  cin >> n;
+  cout << concatenate(n);
+}
