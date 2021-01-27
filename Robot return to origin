@@ -1,0 +1,33 @@
+//https://leetcode.com/problems/robot-return-to-origin/
+#include<bits/stdc++.h>
+using namespace std;
+
+bool judgeCircle(string s){
+  int n = s.length();
+  int x = 0; int y = 0; 
+  for(int i = 0; i<n; i++){
+    if(s[i] == 'U'){
+      x++;
+    }
+    else if(s[i] == 'D') {
+      x--;
+    }
+    if(s[i] == 'R'){
+      y++;
+    }
+    else if(s[i] == 'L'){
+      y--;
+    }
+  }
+  if(x == 0  && y == 0){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+int main(){
+  string s;
+  getline(cin, s);
+  cout << boolalpha << judgeCircle(s);
+}
