@@ -1,0 +1,110 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/582/week-4-january-22nd-january-28th/3615/
+// merge k sorted linked list.
+#include <bits/stdc++.h>
+using namespace std;
+class Node
+{
+public:
+    int val;
+    Node *next;
+};
+Node *head;
+typedef vector<Node *> vn;
+Node *getdata(int data)
+{
+    Node *temp = new Node();
+    temp->val = data;
+    temp->next = NULL;
+    return temp;
+}
+void display(Node *h)
+{
+    if (h == NULL)
+    {
+        cout << "List is empty" << endl;
+    }
+    int n = 1;
+    Node *p = h;
+    while (p != NULL)
+    {
+        cout << "Data in node " << n << " : " << p->val << endl;
+        p = p->next;
+        n++;
+    }
+}
+Node *sortedMerge(Node *a, Node *b)
+{
+    Node *res = NULL;
+    if (a == NULL)
+    {
+        return (b);
+    }
+    if (b == NULL)
+    {
+        return (a);
+    }
+    if (a->val <= b->val)
+    {
+        res = a;
+        res->next = sortedMerge(a->next, b);
+    }
+    else
+    {
+        res = b;
+        res->next = sortedMerge(a, b->next);
+    }
+    return res;
+}
+Node *mergeSortedk(vn &lists)
+{
+    int n = lists.size();
+    if (n == 0)
+    {
+        return NULL;
+    }
+    while (n > 1)
+    {
+        for (int i = 0; i < n / 2; i++)
+        {
+            lists[i] = sortedMerge(lists[i], lists[n - i - 1]);
+        }
+        n = (n + 1) / 2;
+    }
+    return lists[0];
+}
+int main()
+{
+    int k;
+    cout << "Enter the value of k : ";
+    cin >> k;
+    vn vecNode(k);
+    for (int i = 0; i < k; i++)
+    {
+        int n, data;
+        cout << "Enter the number of nodes : ";
+        cin >> n;
+        if(i == 0){
+            cout << "Enter the data in node " << i + 1 << " : " ;
+        }
+        else{
+            cout << "Enter the data in node " << i << " : " ;
+        }
+        cin >> data;
+        vecNode[i] = getdata(data);
+        head = vecNode[i];
+        for (int j = 2; j <= n; j++)
+        {
+            cout << "Enter the data in node " << j << " : ";
+            cin >> data;
+            head->next = getdata(data);
+            head = head->next;
+        }
+    }
+    for (auto x : vecNode)
+    {
+        display(x);
+        cout << endl;
+    }
+    head = mergeSortedk(vecNode);
+    display(head);
+}
