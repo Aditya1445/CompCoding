@@ -1,5 +1,16 @@
 // n = 3 and k = 27. then the resultant string will be aay i.e. 1 + 1 + 25 = 27.
 // https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
+// Key idea is to have as many "a"s at the beginning as possible, so that the 
+// string will be lexicographically smallest.
+// Similarly, maximize "z"s at the end so that the character will be between 
+// "a"s and "z"s will be as small as possible.
+// Say, n = 6 and k is 57, then we can't have more than 3 "a"s because 4 x "a"s
+// would mean remaining 2 characters should add up to (57-4) which is not possible.
+// So initial 3 characters are "aaa". Now we want to make 54 from 3 characters.
+// Because we want the first character to be as small as possible, it only makes sense
+// to have as many "z"s at the end as possible.
+// So although, "aaacyz" and "aaabzz" add to 57, "aaabzz" is the answer because it is
+// smaller of the two.
 #include<bits/stdc++.h>
 using namespace std;
 
