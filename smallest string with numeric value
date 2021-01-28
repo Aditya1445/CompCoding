@@ -1,0 +1,34 @@
+// n = 3 and k = 27. then the resultant string will be aay i.e. 1 + 1 + 25 = 27.
+// https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
+#include<bits/stdc++.h>
+using namespace std;
+
+string getSmallestString(int n, int k){
+    
+    string res = "";
+    int a = n; // count of a's. maximize the number of a for getting the lexicographically smallest string.
+    while((k-a) > 26*(n-a)){
+      a--;
+    }
+    k = k-a;
+    int z = 0; // count for z at the end.
+    while(k >= 26*(z+1)){
+      z++;
+    }
+    for(int i = 0; i<a; i++){
+      res += "a" ;
+    }
+    if(a+z < n){ // if z is not enough to build string search for another character.
+      res += ('a' + k - 26*z-1);
+    }
+    for(int i = 0; i<z; i++){
+      res += "z" ;
+    }
+    return res;
+}
+int main(){
+  int n, k;
+  cin >> n >> k;
+  string str = getSmallestString(n, k);
+  cout << str;
+}
