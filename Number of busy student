@@ -1,0 +1,39 @@
+// https://leetcode.com/problems/number-of-students-doing-homework-at-a-given-time/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+
+int busyStudent(vi& start, vi& end, int queryTime){
+  int cnt = 0;
+  int n = start.size();
+  for(int i = 0; i<n; i++){
+    if(start[i] <= queryTime && end[i] >= queryTime){
+      cnt++;
+    }
+  }
+  return cnt;
+}
+int main(){
+  int n, m, data;
+  cin >> n >> m;
+  vi start;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    start.push_back(data);
+  }
+  vi end;
+  for(int j = 0; j<m; j++){
+    cin >> data;
+    end.push_back(data);
+  }
+  /*for(auto x : start){
+    cout << x << " ";
+  }
+  for(auto i : end){
+    cout << i << " ";
+  }*/
+  int q_time;
+  cin >> q_time;
+  int ans = busyStudent(start, end, q_time);
+  cout << ans;
+}
