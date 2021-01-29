@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/
+#include<bits/stdc++.h>
+using namespace std;
+
+string freqAlphabet(string a){
+  // string ans = "";
+    string s = "";
+        int n = a.length();
+        cout << n << endl;
+        for(int i=n-1;i>=0;i--)
+        {
+            if(a[i]=='#')
+            {
+                int x = (a[i-2]-'0')*10 + (a[i-1]-'1');
+                s += 'a'+x;
+                i-=2;
+            }
+            else
+            {
+                int x = a[i]-'1';
+                s += 'a'+x;
+            }
+        }
+        reverse(s.begin(),s.end());
+        return s;
+}
+int main(){
+  string s;
+  getline(cin, s);
+  string res = freqAlphabet(s);
+  cout << res;
+}
