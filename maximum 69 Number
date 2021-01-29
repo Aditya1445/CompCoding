@@ -1,0 +1,22 @@
+//https://leetcode.com/problems/maximum-69-number/
+#include<bits/stdc++.h>
+using namespace std;
+
+int maximum69Number(int num){
+  string str = to_string(num);
+  int i = 0;
+  while(i < str.length()){
+    if(str[i] == '6'){
+      str[i] = '9';
+      return stoi(str);
+    }
+    i++;
+  }
+  return num;
+
+}
+int main(){
+  int num;
+  cin >> num;
+  cout << maximum69Number(num);
+}
