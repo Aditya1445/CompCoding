@@ -1,0 +1,60 @@
+// Convert binary data in linked list to decimal
+//https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/
+#include<bits/stdc++.h>
+using namespace std;
+class Node{
+  public:
+  bool data;
+  Node *next;
+};
+Node *head;
+Node *gethead(Node **h, int data){
+  Node *temp = new Node();
+  Node *p = *h;
+  temp->data = data;
+  temp->next = NULL;
+  if(*h == NULL){
+    *h = temp;
+    p = temp;
+  }
+  else{
+    while(p != NULL){
+      if(p->next == NULL){
+        p->next = temp;
+        p = p->next;
+      }
+      p = p->next;
+    }
+  }
+  return *h;
+}
+void display(Node *h){
+  if(h == NULL){
+    cout << "List is empty" << endl;
+  }
+  Node *p = h;
+  // int n = 1;
+  while(p!=NULL){
+    cout << p->data << endl;
+    p = p->next;
+  }
+}
+int getDecimal(Node *head){
+  int res = 0;
+  while(head != NULL){
+    res = (res << 1) + head->data;
+    head = head->next;
+  }
+  return res;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    gethead(&head, data);
+  }
+  display(head);
+  int ans = getDecimal(head);
+  cout << ans;
+}
