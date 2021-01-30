@@ -1,0 +1,42 @@
+https://leetcode.com/explore/challenge/card/january-leetcoding-challenge-2021/583/week-5-january-29th-january-31st/3622/
+// even valued element can only decrease if its being divided by 2 and odd elements can only increase as its being multiplied by 2.
+// we need to increase the odd element by multiplying it by 2 and keeping the even element same and insert it into the set of integers.
+// Deviation is defined as the difference between max and min. either if the current max value is smaller than previous one or the minimum value is greater than the previous minimum.
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef vector<int> vi;
+int minDeviation(vi& nums){
+  set<int> st;
+  for(auto x : nums){
+    if(x%2 != 0){
+      st.insert(x*2);
+    }
+    else{
+      st.insert(x);
+    }
+  }
+  cout << st.size() << endl;
+  int res = *st.rbegin() - *st.begin(); // set the default deviation 
+  while(*st.rbegin()%2 == 0){ // iterate over the set if the element is divided by 2 then divide and push it into the set and remove the last element 
+    st.insert(*st.rbegin()/2);
+    st.erase(*st.rbegin());
+    res = min(res, *st.rbegin()- *st.begin()); // find the minimum of default deviation and the new deviation
+  }
+  return res;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vi nums;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    nums.push_back(data);
+  }
+  /*for(auto x : nums){
+    cout << x << " ";
+  }*/
+
+  int ans = minDeviation(nums);
+  cout << ans;
+}
