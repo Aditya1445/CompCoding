@@ -1,0 +1,45 @@
+// https://leetcode.com/problems/permutations/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
+
+void permute(vi& nums, int id, vvi& res){
+  if(id == 1){
+    res.push_back(nums);
+    return;
+  }
+  for(int i = 0; i < id; i++){
+  
+    permute(nums,id-1, res);
+    
+    if(id %2 == 0){
+      swap(nums[i], nums[id-1]);
+    }
+    else{
+      swap(nums[0], nums[id-1]);
+    }
+  }
+}
+vvi heapPermutation(vi& nums){
+  vvi res;
+  int n = nums.size();
+  permute(nums, n, res);
+  return res;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vi nums;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    nums.push_back(data);
+  }
+  vvi cc = heapPermutation(nums);
+  for(auto x : cc){
+    for(int i : x){
+      cout << i << " ";
+    }
+    cout << endl;
+  }
+}
