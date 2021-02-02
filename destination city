@@ -1,0 +1,47 @@
+//https://leetcode.com/problems/destination-city/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<vector<string>> vvs;
+
+string destCity(vvs& paths){
+  /*set<string> st;
+  for(auto a : paths){
+    st.emplace(a[0]);
+  }
+  for(auto x : paths){
+    if(!st.count(x[1])){
+      return x[1];
+    }
+  }
+  return "";*/
+  unordered_map<string, string> m;
+        for(auto& e: paths)     m[e[0]] = e[1];
+        string cur(paths[0][0]);
+        while(m.count(cur))
+            cur = m[cur];
+        return cur;
+}
+int main(){
+  int n; cin >> n;
+  int m; cin >> m;
+  string s;
+  vvs paths;
+  for(int i = 0; i<n; i++){
+    vector<string> vs;
+    for(int j = 0; j<m; j++){
+      cin >> s;
+      vs.push_back(s);
+    }
+    paths.push_back(vs);
+  }
+  /*for(auto x : paths){
+    for(string i : x){
+      cout << i << " ";
+    }
+    cout << endl;
+  }*/
+  string city = destCity(paths);
+  cout << city; 
+
+   
+}
