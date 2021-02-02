@@ -1,0 +1,52 @@
+https://leetcode.com/problems/permutations-ii/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
+
+bool shouldSwap(vi& nums, int l, int r){
+  for(int i = l; i<r; i++){
+      if(nums[i] == nums[r]){
+        return 0;
+      }
+  }
+  return 1;
+
+}
+void permute(vi& nums, int id, vvi& res){
+  if(id == nums.size()-1){
+    res.push_back(nums);
+    return;
+  }
+  for(int i = id; i < nums.size(); i++){
+    bool check = shouldSwap(nums, id, i);
+    if(check){
+      swap(nums[i], nums[id]);
+      permute(nums, id+1, res);
+      swap(nums[i], nums[id]);
+    }
+  }
+}
+vvi heapPermutation(vi& nums){
+  vvi res;
+  sort(nums.begin(), nums.end());
+  int n = nums.size();
+  permute(nums, 0, res);
+  return res;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vi nums;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    nums.push_back(data);
+  }
+  vvi cc = heapPermutation(nums);
+  for(auto x : cc){
+    for(int i : x){
+      cout << i << " ";
+    }
+    cout << endl;
+  }
+}
