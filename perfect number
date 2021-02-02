@@ -1,0 +1,21 @@
+// https://leetcode.com/problems/perfect-number/
+#include<bits/stdc++.h>
+using namespace std;
+
+bool checkPerfectNumber(int num){
+  int sum = 1;
+  for(int i = 2; i*i<=num; i++){
+      if(num%i == 0){
+        sum = sum + i + num/i;
+      }
+  }
+  if(sum == num && num != 1)
+    return true;
+  
+  return false;
+}
+int main(){
+  int num;
+  cin >> num;
+  cout << boolalpha << checkPerfectNumber(num);
+}
