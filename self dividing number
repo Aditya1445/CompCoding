@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/self-dividing-numbers/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+
+vi selfDividingNumbers(int left, int right){
+  vi ans;
+  for(int i = left; i<=right; i++){
+    int temp = i;
+    while(temp>0){
+      int digits = temp%10;
+      if(digits == 0 || i%digits != 0){
+         break;
+      }
+      temp /= 10;
+    }
+    if(temp == 0){
+      ans.push_back(i);
+    }
+  }
+  return ans;
+}
+int main(){
+  int left;
+  int right;
+  cin>> left;
+  cin>> right;
+  vi res = selfDividingNumbers(left, right);
+  for(int i : res){
+    cout << i << " ";
+  }
+}
