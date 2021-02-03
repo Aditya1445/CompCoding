@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/di-string-match/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+
+vi diString(string S){
+  int l = count(S.begin(), S.end(), 'D');
+  int r = l;
+  vi res = {l};
+  for(char &c : S){
+    res.push_back(c == 'I'? ++r : --l);
+  }
+  return res;
+}
+int main(){
+  string s;
+  getline(cin, s);
+  vi ans = diString(s);
+  for(int i : ans){
+    cout << i << " ";
+  }
+}
