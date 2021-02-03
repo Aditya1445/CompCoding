@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/linked-list-cycle-ii/
+// In this problem we have to return the position where the loop is connected.
+// use floyds cycle algorithm
+ListNode *detectCycle(ListNode *head) {
+        if(head == NULL || head->next == NULL){
+            return NULL;
+        }
+        ListNode *first = head;
+        ListNode *second = head;
+        bool isLoop = false;
+        while(second && second->next){
+            first = first->next;
+            second = second->next->next;
+            if(first == second){
+                isLoop = true;
+                break;
+            }
+        }
+        if(!(isLoop)) return NULL;
+        first = head;
+        while(first != second){
+            first = first->next;
+            second = second->next;
+        }
+        return first;
+    }
