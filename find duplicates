@@ -1,6 +1,7 @@
 // https://leetcode.com/problems/find-the-duplicate-number/
 // we have to do it in O(1) space and O(n) time complexity.
 // we can use the basic concept of hasmap .
+
 #include<bits/stdc++.h>
 using namespace std;
 typedef vector<int> vi;
@@ -27,3 +28,13 @@ int main(){
   }
   cout << findDuplicate(nums);
 }
+// Alternative approach Sort the array/vector then traverse the whole array.
+/* int findDuplicates(vi& nums)
+int n = nums.size();
+        sort(nums.begin(), nums.end());
+        for(int i = 0; i<n-1; i++){
+            if(nums[i] == nums[i+1]){
+                return nums[i];
+            }
+        }
+        return 0;*/
