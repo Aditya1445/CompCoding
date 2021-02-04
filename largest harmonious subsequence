@@ -1,0 +1,33 @@
+// https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/584/week-1-february-1st-february-7th/3628/
+// The start position is used for counting purpose and new start is used for whenever come across different number
+// When the number is different from previous number, update the new start position. When difference between current position and start position is bigger than 1 then update start position.
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+
+int findLHS(vi& nums){
+  sort(nums.begin(), nums.end());
+  int len = 0;
+  for(int i = 1,start = 0, new_start = 0; i<nums.size(); i++){
+    if(nums[i] - nums[start] > 1){
+      start = new_start;
+    }
+    if(nums[i] != nums[i-1]){
+      new_start = i;
+    }
+    if(nums[i] - nums[start] == 1){
+      len = max(len, i-start+1);
+    }
+  }
+  return len;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vi nums;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    nums.push_back(data);
+  }
+  cout << findLHS(nums);
+}
