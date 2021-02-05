@@ -20,6 +20,21 @@ int findLHS(vi& nums){
     }
   }
   return len;
+  // Alternate solution. 
+  // First loop through all elements and count each number appearance. Then loop through unordered_map, to find if the key + 1 is in the unordered map or not.
+  // to avoid countin twice we only need to check key + 1 instead of key +1 and key - 1 both.
+  // if key + 1 and key both are in the map. then update the result.
+  /*unordered_map<int, int> mp;
+  for(auto x : nums){
+    mp[x]++;
+  }
+  int len = 0;
+  for(auto [k,v] : mp){
+    if(mp.find(k+1) != mp.end()){
+      len = max(len, v + mp[k+1]);
+    }
+  }
+  return len;*/
 }
 int main(){
   int n, data;
