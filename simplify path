@@ -1,0 +1,39 @@
+// https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/584/week-1-february-1st-february-7th/3629/
+#include<bits/stdc++.h>
+using namespace std;
+ string simplifyPath(string path){
+   stringstream ss(path);
+   vector<string> vs;
+   string res, temp;
+   while(getline(ss, temp, '/')){
+     if(temp == "" || temp == ".") continue;
+     if(temp == ".." && !vs.empty()) vs.pop_back();
+     else if(temp != "..") vs.push_back(temp);
+   }
+   for(auto k : vs){
+     res += "/" + k;
+   }
+   return res.empty() ? "/" : res;
+ }
+int main(){
+  string path;
+  getline(cin, path);
+  cout << simplifyPath(path);
+  // cout << "The path is " << path;
+}
+// we can use stack also
+/* 
+ string simplifyPath(string path){
+   stringstream ss(path);
+   stack<string> st;
+   string res, temp;
+   while(getline(ss, temp, '/')){
+     if(temp == "" || temp == ".") continue;
+     if(temp == ".." && !vs.empty()) st.pop();
+     else if(temp != "..") st.push(temp);
+   }
+   while(!st.empty(){
+     res = "/" +st.top() + res;
+   }
+   return res.empty() ? "/" : res;
+ }*/
