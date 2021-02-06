@@ -1,0 +1,32 @@
+// https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/
+// using arithmetic mean , a[0] + a[n-1]*n/2 = 0; (b = (a+c)/2)
+// a[0] + a[n-1] = 0
+//a[n-1] - a[0] = (n-1) * delta, which is -2 * a[0],
+//so we simply set delta = 2, a[0] = 1 - n
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<int> vi;
+vi sumZero(int n){ 
+  vi ans (n);
+  for(int i = 0; i<n; i++){
+    ans[i] = i*2 -n + 1;
+  }
+  return ans;
+  // alternate method
+  //
+  //int sum = 0;
+  //for(int i = 0; i<n-1; i++){
+  //  ans[i] = i;
+  //  sum += ans[i];
+  //}
+  //ans[n-1] -= sum;
+  //return ans;
+}
+int main(){
+  int n;
+  cin >> n;
+  vi ans = sumZero(n);
+  for(int i : ans){
+    cout << i << " ";
+  }
+}
