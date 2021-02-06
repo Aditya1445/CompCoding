@@ -1,0 +1,42 @@
+//https://leetcode.com/problems/number-of-rectangles-that-can-form-the-largest-square/
+// count takes the number of squares with max len and ma len refers to square having largest length
+// rectangle dimension d = [l, b] and k having max length of sqaure side where k is k<=l and k<=b so if we can find the minimum of l and b we can set the value of k.
+// after then we can find the frequency of maxlen.
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<vector<int>> vvi;
+typedef vector<int> vi;
+
+int goodRectangles(vvi& rectangles){
+  int count = 0;
+  unordered_map<int, int> mp;
+  for(auto x :  rectangles){
+    mp[min(x[0], x[1])]++;
+  }
+  int maxlen = 0;
+  for(auto m : mp){
+    if(m.first > maxlen)count = m.second, maxlen = m.first; // count stores the frequency of square having maxlen. 
+  }
+  return count;
+}
+int main(){
+  int n, m, data;
+  cin >> n >> m;
+  vvi rectangles;
+  for(int i = 0; i<n; i++){
+    vi dim;
+    for(int j = 0; j<m; j++){
+      cin >> data;
+      dim.push_back(data);
+    }
+    rectangles.push_back(dim);
+  }
+  /*for(auto x : rectangles){
+    for(int i : x){
+      cout << i << " ";
+    }
+    cout << endl;
+  }*/
+  int ans = goodRectangles(rectangles);
+  cout << ans;
+}
