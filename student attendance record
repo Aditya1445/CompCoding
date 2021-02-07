@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/student-attendance-record-i/
+#include<bits/stdc++.h>
+using namespace std;
+
+bool checkRecord(string s){
+ int cl = 0, ca = 0;
+ for(int i = 0; i<s.length(); i++){
+   if(s[i] == 'A'){
+     if(ca) return false;
+     ca++;
+     cl = 0;
+   }
+   else if(s[i] == 'L'){
+     if(cl == 2) return false;
+     cl++;
+   }
+   else{
+     cl = 0;
+     
+   }
+ }
+ return true; 
+}
+int main(){
+  string s;
+  getline(cin,s);
+  cout << boolalpha << checkRecord(s);
+}
