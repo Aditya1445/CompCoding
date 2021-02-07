@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/replace-elements-with-greatest-element-on-right-side/
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int>replaceElements(vector<int>& nums){
+  int curr_max = nums[nums.size()-1]; // store the last element in array as max.
+  int val;
+  nums[nums.size()-1] = -1; // replace the last element of array with -1 as there is no other element on right.
+  for(int i = nums.size()-2; i>=0; i--){ // traverse from the second last to the right of array
+    val = curr_max; // this will store the curr_max value.
+    curr_max = max(curr_max, nums[i]); // compare and update current max with nums[i] as traversing the loop
+    nums[i] = val; update nums[i] with value stored in val and continue the traversal until the end of the loop . 
+  }
+  return nums;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> num;
+  for(int i = 0; i<n; i++){
+      cin >> data;
+      num.push_back(data);
+  }
+  vector<int> ans = replaceElements(num);
+  for(int x : num){
+    cout << x << " ";
+  }
+}
