@@ -1,0 +1,34 @@
+// https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/585/week-2-february-8th-february-14th/3633/
+class PeekingIterator : public Iterator {
+private: 
+    int cache;
+    bool cHasNext;
+public:
+	PeekingIterator(const vector<int>& nums) : Iterator(nums) {
+	    // Initialize any member here.
+	    // **DO NOT** save a copy of nums and manipulate it directly.
+	    // You should only use the Iterator interface methods.
+        cHasNext = Iterator::hasNext();
+        if (cHasNext)
+    	    cache = Iterator::next();   
+	}
+	
+    // Returns the next element in the iteration without advancing the iterator.
+	int peek() {
+        return cache;
+	}
+	
+	// hasNext() and next() should behave the same as in the Iterator interface.
+	// Override them if needed.
+	int next() {
+	    int tmp = cache;
+        cHasNext = Iterator::hasNext();
+        if (cHasNext)
+            cache = Iterator::next();
+        return tmp;
+	}
+	
+	bool hasNext() const {
+	    return cHasNext;
+	}
+};
