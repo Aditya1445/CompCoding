@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/majority-element/
+//This can be solved by Moore's voting algorithm. 
+//Basic idea of the algorithm is if we cancel every occurrence of an element x with all the other elements that are different from x
+//Then x will exist till end if it is a majority element.
+#include<bits/stdc++.h>
+using namespace std;
+
+int majorityElement(vector<int>& nums){
+  int m_idx = 0;
+  for(int count = 1, i = 1; i<nums.size(); i++){
+    nums[m_idx] == nums[i] ? count++ : count--;
+    if(count == 0) count = 1; m_idx = i; // if count reaches 0 then change major index(m_idx) to current element and set count to 1. 
+  }
+  return nums[m_idx];
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> nums;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    nums.push_back(data);
+  }
+  int res = majorityElement(nums);
+  cout << res;
+}
