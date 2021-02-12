@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/array-partition-i/
+#include<bits/stdc++.h>
+using namespace std;
+int arrayPairSum(vector<int>& nums){
+  sort(nums.begin(), nums.end());
+  int maxSum = 0;
+  for(int i = 1; i<nums.size(); i+=2){
+    maxSum += min(nums[i], nums[i-1]);
+  }
+  return maxSum;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int>nums;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    nums.push_back(data);
+  }
+  int res = arrayPairSum(nums);
+  cout << res;
+}
