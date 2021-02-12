@@ -1,0 +1,27 @@
+//https://leetcode.com/problems/unique-number-of-occurrences/
+// Logic :- first count the occurrences of each element using map. And then store that occurrences in set
+// if the size of set(since set contains only unique element) is equal to the size of the map(which contains the occurred element) return true else false.  
+#include<bits/stdc++.h>
+using namespace std;
+
+bool uniqueOccurrences(vector<int>& nums){
+  unordered_map<int,int> mp;
+  for(int i = 0; i<nums.size(); i++){
+    mp[nums[i]]++;
+  }
+  unordered_set<int> st;
+  for(auto p : mp){
+    st.insert(p.second);
+  }
+  return mp.size() == st.size();
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int>nums;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    nums.push_back(data);
+  }
+  cout << boolalpha << uniqueOccurrences(nums); 
+}
