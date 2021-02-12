@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/height-checker/
+// logic : store the original array of heights into another temporary array and sort the original one.
+//  After sorting (since the length are same ) traverse the loop and compare the sorted array with the temporary array , if the data/elements are different,
+// as if elements are different it will show that the students are shifted. initialize a count variable to zero and count the elements that are different while traversing the loop.
+// and return the count.
+#include<bits/stdc++.h>
+using namespace std;
+
+int heightChecker(vector<int>& heights){
+  int n = heights.size(), count = 0;
+  vector<int> temp(heights.begin(), heights.end());
+  sort(heights.begin(), heights.end());
+  for(int i = 0; i<n; i++){
+    if(heights[i] != temp[i]){
+      count++;
+    }
+  }
+  return count;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> heights;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    heights.push_back(data);
+  }
+  int res = heightChecker(heights);
+  cout << res;
+}
