@@ -1,0 +1,36 @@
+// https://leetcode.com/problems/make-two-arrays-equal-by-reversing-sub-arrays/
+#include<bits/stdc++.h>
+using namespace std;
+
+bool canBeEqual(vector<int>& target, vector<int>& arr){
+  sort(target.begin(), target.end());
+  sort(arr.begin(), arr.end());
+  for(int i = 0; i<target.size(); i++){
+    if(target[i] != arr[i]){
+      return false;
+      break;
+    }
+  }
+  return true;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> target, arr;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    target.push_back(data);
+  }
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    arr.push_back(data);
+  }
+ /* for(auto x : target){
+    cout << x << " ";
+  }
+  cout << endl;
+  for(auto x : arr){
+    cout << x << " ";
+  }*/
+  cout << boolalpha << canBeEqual(target, arr);
+}
