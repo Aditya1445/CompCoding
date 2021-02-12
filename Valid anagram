@@ -1,0 +1,25 @@
+// https://leetcode.com/problems/valid-anagram/
+// Increase the count if any character of s is encountered and decrement the count for t if any character is faced. if the count value remains constant then return 
+// true else false
+#include<bits/stdc++.h>
+using namespace std;
+bool isAnagram(string s, string t){
+  int n = s.size();
+  int counts[26] = {0};
+  if(s.size() != t.size()) return false;
+  for(int i = 0; i<n; i++){
+    counts[s[i] - 'a']++;
+    counts[t[i] - 'a']--;
+  }
+  for(int i = 0; i<26; i++){
+    if(counts[i]) return false;
+  }
+  return true;
+}
+int main(){
+  
+  string s, t;
+  getline(cin, s);
+  getline(cin, t);
+  cout << boolalpha << isAnagram(s,t);
+}
