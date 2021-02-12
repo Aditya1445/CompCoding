@@ -1,0 +1,29 @@
+//https://leetcode.com/problems/peak-index-in-a-mountain-array/
+#include<bits/stdc++.h>
+using namespace std;
+
+int peak(vector<int>& arr){
+  // return max_element(arr.begin(), arr.end()) - arr.begin();
+  int l = 0, r = arr.size() - 1;
+  while(l < r){
+    int mid = l + (r-l)/2;
+    if(arr[mid] < arr[mid+1]){
+      l = mid+1;
+    }
+    else{
+      r = mid;
+    }
+  }
+  return l;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> arr;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    arr.push_back(data);
+  }
+  int ans = peak(arr);
+  cout << ans;
+}
