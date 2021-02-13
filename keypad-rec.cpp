@@ -11,8 +11,8 @@ vs getKPC(string s) {
 	} 
 	char ch = s.at(0);//5
 	string ros = s.substr(1);//73
-	vs rres = getKPC(ros);
-	vs mres;
+	vs rres = getKPC(ros); // get words combinatin of 73.
+	vs mres; // stores the result of 573
 	string sk = str[ch - '0'];
 	for (int i = 0; i < sk.size(); i++)
 	{
