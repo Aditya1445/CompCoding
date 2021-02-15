@@ -1,0 +1,45 @@
+// https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/586/week-3-february-15th-february-21st/3641/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<vector<int>> vvi;
+typedef vector<int> vi;
+
+vi kWeakestRows(vvi& mat, int k){
+  int r = mat.size(), c = mat[0].size();
+  int count;
+  vector<pair<int, int>> vp;
+  for(int i = 0; i<r ; i++){
+    count = 0;
+    for(int j = 0; j<c; j++){
+      if(mat[i][j] == 1){
+        count++;
+      }
+    }
+    vp.push_back(make_pair(count, i));
+  }
+  vector<int> vs;
+  sort(vp.begin(), vp.end()); // sort by first.
+  for(int i = 0; i<k; i++){
+    vs.push_back(vp[i].second);
+  }
+  return vs;
+}
+int main(){
+  int n, m, data;
+  cin >> n >> m;
+  vvi mat;
+  for(int i = 0; i<n; i++){
+    vi vec;
+    for(int j = 0; j<m; j++){
+      cin >> data;
+      vec.push_back(data);
+    }
+    mat.push_back(vec);
+  }
+  int k;
+  cin >> k;
+  vi res = kWeakestRows(mat, k);
+  for(auto x : res){
+    cout << x << " ";
+  }
+}
