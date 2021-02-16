@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void permute(string ip, string op, vector<string>& res){
+  if(ip.length() == 0){
+    res.push_back(op);
+    return;
+  }
+  string op1 = op;
+  string op2 = op;
+  if(isalpha(ip[0])){
+    op1.push_back(tolower(ip[0]));
+    op2.push_back(toupper(ip[0]));
+    ip.erase(ip.begin()+0);
+    permute(ip, op1, res);
+    permute(ip, op2, res);
+  }else{
+    string op1 = op;
+    op1.push_back(ip[0]);
+    ip.erase(ip.begin()+0);
+    permute(ip, op1, res);
+  }
+}
+vector<string>letterCasePermutation(string S){
+  vector<string> res;
+  string ip = S;
+  string op = "";
+  permute(ip, op, res);
+  return res;
+}
+int main(){
+  string s;
+  getline(cin, s);
+  vector<string> vs = letterCasePermutation(s);
+  for(string str : vs){
+    cout << str << " ";
+  }
+}
