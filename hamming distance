@@ -1,4 +1,7 @@
 // https://leetcode.com/problems/hamming-distance/
+// In this problem we have to find the number of positions at which bits are different . we will use xor operation on two numbers.
+// Xor operation gives set bits (1) for different bits and unset bits (0) for same bits. Since only two distinct bits can result in set bits.
+// we will coount the number of set bits by using brian kernighan algorithm on number generated from xor operation . 
 #include<bits/stdc++.h>
 using namespace std;
 
