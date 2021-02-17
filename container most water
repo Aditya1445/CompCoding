@@ -1,0 +1,29 @@
+// https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/586/week-3-february-15th-february-21st/3643/
+#include<bits/stdc++.h>
+using namespace std;
+int maxArea(vector<int>& height){
+  int area = 0;
+  int l = 0;
+  int r = height.size()-1;
+  while(l < r){
+    area = max(area, min(height[l],height[r]) * (r-l));
+    if(height[l] < height[r]){
+      l++;
+    }
+    else{
+      r--;
+    }
+  }
+  return area;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> height;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    height.push_back(data);
+  }
+  int area = maxArea(height);
+  cout << area;
+}
