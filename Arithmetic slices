@@ -1,0 +1,40 @@
+// https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/586/week-3-february-15th-february-21st/3644/
+#include<bits/stdc++.h>
+using namespace std;
+
+int numberOfSlices(vector<int>& A){
+    /*int res = 0;
+    int n = A.size();
+    for(auto i = 2, j = 1; i<n; i++){
+      if(A[i]- A[i-1] != A[j] - A[j-1]){
+        j = i;
+      }
+      res += i-j;
+    }
+    return res;*/ // Alternative.
+    int n = A.size();
+    if(n < 3) return 0;
+    vector<int> dp(n,0);
+    if(A[2] - A[1] != A[1] - A[0]){
+      dp[2] = 1;
+    }
+    int result = dp[2];
+    for(int i = 3; i<n; i++){
+      if(A[i]-A[i-1] == A[i-1] - A[i-2]){
+        dp[i] = dp[i-1] + 1;
+      }
+      result += dp[i];
+    }
+    return result;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> A;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    A.push_back(data);
+  }
+  int count = numberOfSlices(A);
+  cout << count << endl;
+}
