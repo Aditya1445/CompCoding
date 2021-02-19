@@ -1,0 +1,29 @@
+// https://leetcode.com/explore/challenge/card/february-leetcoding-challenge-2021/586/week-3-february-15th-february-21st/3645/
+// Logic : we will only push the index in stack when we encouter ('(') and pop the stack if we encounter (')') , if the stack is alraedy empty then mark the removed parantheses with *.
+// also after traversing the string, if the stack is not empty (it will be filled with the indexes of umpaired '(' ) and that need to be removed too. after marking removed parantheses with * 
+// remove them in the end.
+#include<bits/stdc++.h>
+using namespace std;
+string validParantheses(string s){
+  stack<int> st;
+  for(auto i = 0; i<s.size(); i++){
+    if(s[i] == '(') st.push(i);
+    if(s[i] == ')'){
+      if(!st.empty()) st.pop();
+      else s[i] = '*';
+    }
+  }
+  while(!(st.empty())){
+    s[st.top()] = '*';
+    st.pop();
+  }
+  s.erase(remove(s.begin(), s.end(), '*'), s.end());
+  return s;
+}
+int main(){
+  string s;
+  getline(cin, s);
+  string res = validParantheses(s);
+  cout << res;
+}
+// lee(t(c)o)de)
