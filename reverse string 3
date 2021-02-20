@@ -1,0 +1,23 @@
+// https://leetcode.com/problems/reverse-words-in-a-string-iii/
+#include<bits/stdc++.h>
+using namespace std;
+
+string reverseWords(string s){
+  if(s.size() == 0) return "";
+  stringstream ss(s);
+  string word;
+  string res = "";
+  while(ss >> word){
+    reverse(word.begin(), word.end());
+    res += word;
+    res += " ";
+  }
+  res.erase(res.size()-1);
+  return res;
+}
+int main(){
+  string s;
+  getline(cin, s);
+  string res = reverseWords(s);
+  cout << res;
+}
