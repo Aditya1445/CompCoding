@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/find-lucky-integer-in-an-array/
+#include<bits/stdc++.h>
+using namespace std;
+
+int findLucky(vector<int>& arr){
+  vector<int> vi;
+  unordered_map<int, int> mp;
+  for(auto x : arr){
+    mp[x]++;
+  }
+  for(auto i : mp){
+    if(i.first == i.second){
+      vi.push_back(i.first);
+    }
+  }
+  return (vi.size() > 0) ? *max_element(vi.begin(), vi.end()) : -1;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> arr;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    arr.push_back(data);
+  }
+  int res = findLucky(arr);
+  cout << res;
+}
