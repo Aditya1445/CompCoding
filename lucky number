@@ -1,0 +1,51 @@
+// https://leetcode.com/problems/lucky-numbers-in-a-matrix/
+#include<bits/stdc++.h>
+using namespace std;
+typedef vector<vector<int>> vvi;
+typedef vector<int> vi;
+
+vi luckyNumbers(vvi& matrix){
+  vi arr;
+  unordered_set<int> st;
+  for(int i = 0; i<matrix.size(); i++){
+    int min_num = INT_MAX;
+    for(int j = 0; j<matrix[0].size(); j++){
+      min_num = min(min_num, matrix[i][j]);
+    }
+    st.insert(min_num);
+  }
+  for(int j = 0; j<matrix[0].size(); j++){
+    int maxnum = INT_MIN;
+    for(int i = 0; i<matrix.size(); i++){
+      maxnum = max(maxnum, matrix[i][j]);
+    }
+    if(st.find(maxnum) != st.end()){
+        arr.push_back(maxnum);
+      }
+  }
+  return arr;
+}
+int main(){
+  int n,m,data;
+  cin >> n >> m;
+  vvi matrix;
+  for(int i = 0; i<n; i++){
+    vi vec;
+    for(int j = 0; j<m; j++){
+      cin >> data;
+      vec.push_back(data);
+    }
+    matrix.push_back(vec);
+  }
+  /*for(auto x : matrix){
+    for(int i : x){
+      cout << i << " ";
+    }
+    cout << endl;
+  }*/
+  vi res = luckyNumbers(matrix);
+  // cout << res[0];
+  for(auto i : res){
+    cout << i << " ";
+  }
+}
