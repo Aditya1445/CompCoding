@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/broken-calculator/
+#include<bits/stdc++.h>
+using namespace std;
+int brokenCalc(int X, int Y){
+  int res = 0;
+  while(Y>X){
+    if(Y%2 == 0){
+      Y = Y/2;
+    }
+    else{
+      Y = Y+1;
+    }
+    res++;
+  }
+  return res+X-Y;
+}
+int main(){
+  int X;
+  cin >> X;
+  int Y;
+  cin >> Y;
+  int sub = X - Y;
+  cout << sub;
+  int op = brokenCalc(X, Y);
+  cout << op;
+}
