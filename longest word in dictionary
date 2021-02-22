@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/
+#include<bits/stdc++.h>
+using namespace std;
+
+string findLongestWord(string s, vector<string>& d){
+  string ans;
+  for(string word : d){
+    int j = 0, k = 0;
+    while(j < s.size() && k < word.size()){
+      if(word[k] == s[j]){
+        k++;
+      }
+      j++;
+    }
+    int n = word.size();
+    while(k == n && ((ans.size() == n && ans > word) || ans.size() < n)){
+      ans = word;
+    }
+  }
+  return ans;
+}
+int main(){
+  string s;
+  getline(cin, s);
+  vector <string > dict = {"ba", "ab", "a", "b"};
+  string res = findLongestWord(s, dict);
+  cout << res;
+}
