@@ -1,0 +1,45 @@
+// s = (()(()))
+#include<bits/stdc++.h>
+using namespace std;
+
+int scoreOfParantheses(string s){
+  /*stack<int> st;
+  int count = 0;
+  for(char i : s){
+    if(i == '('){
+      st.push(count);
+      count = 0;
+    }else{
+      count += st.top() +  max(count, 1);
+      st.pop();
+    }
+  }
+  return count;*/
+  // alternate
+  stack<int> c_stack;
+  c_stack.push(0);// to find the total score. initially it is 0.
+  for(char i : s){
+    if(i == '('){
+      c_stack.push(0); // when encountered '(' push 0 in the stack.
+    }
+    else{
+      int temp = c_stack.top(); // balance the last '(' , and store the score of inner parantheses.
+      c_stack.pop();
+      int val = 0;
+      if(temp > 0){ // if it is not zero then double the value as when we encounter ')' we know that inner parantheses exist.
+        val = temp*2;
+      }
+      else{
+        val = 1; // means temp = 0 we are not in inner parantheses
+      }
+      c_stack.top() += val; //passing the value to parent parantheses, parent parantheses-> '(' before (). 
+    } 
+  }
+  return c_stack.top();
+}
+int main(){
+  string s;
+  getline(cin, s);
+  int score = scoreOfParantheses(s);
+  cout << score;
+}
