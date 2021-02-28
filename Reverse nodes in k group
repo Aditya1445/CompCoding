@@ -1,0 +1,83 @@
+// https://leetcode.com/problems/reverse-nodes-in-k-group/
+#include<bits/stdc++.h>
+using namespace std;
+
+class Node{
+  public:
+  int data;
+  Node *next;
+};
+Node *head;
+Node *getdata(Node **h, int data){
+  Node *temp = new Node();
+  temp->data = data;
+  temp->next = NULL;
+  Node *t = *h;
+  if(*h == NULL){
+    *h = temp;
+     t = temp;
+  }else{
+    while(t != NULL){
+      if(t->next == NULL){
+        t->next = temp;
+        t = temp;
+      }
+      t = t->next;
+    }
+  }
+  return *h;
+}
+void display(Node *p){
+  if(p == NULL){
+    return;
+  }
+  Node *x = p;
+  int n= 1;
+  while(x!=NULL){
+    cout << "Data in the node " << n << " : " << x->data << endl;
+    x = x->next;
+    n++;
+  }
+}
+int length(Node *head){
+  int count = 0;
+  Node *curr = head;
+  while(curr != NULL){
+    curr = curr->next;
+    count++;
+  }
+  return count;
+}
+Node *reverseKGroup(Node *head, int k){
+  if(length(head) < k){ // if the remaining node count is less than k then return head of that node.
+    return head;
+  }
+  int count = 0;
+  Node *curr = head, *prev = NULL, *next = NULL;
+  while(curr != NULL && count < k){
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+    count++;
+  }
+  if(next != NULL)
+  {
+    head->next = reverseKGroup(next, k);
+  }
+  return prev;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    getdata(&head, data);
+  }
+  int k;
+  cin >> k;
+  display(head);
+  head = reverseKGroup(head, k);
+  cout << "Data in the modified list :" << endl;
+  display(head);
+}
