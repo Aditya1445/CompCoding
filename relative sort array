@@ -1,0 +1,48 @@
+// https://leetcode.com/problems/relative-sort-array/
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2){
+  int a = arr1.size(), b = arr2.size();
+  int h[1001] = {0};
+  for(int i = 0; i<a; i++){ //calaculate the frequency of each element
+    h[arr1[i]]++;
+  }
+  int j = 0;
+  for(int i = 0; i<b; i++){
+    while(h[arr2[i]]){ // Insert the element in arr1 till the frequency of that element reaches zero.
+      arr1[j++] = arr2[i];
+      h[arr2[i]]--;
+    }
+  }
+  for(int i = 0; i<1001; i++){ // copy the remaining element.
+    while(h[i] > 0 ? h[i]-- : 0){
+      arr1[j++] = i;
+    }
+  }
+  return arr1;
+}
+int main(){
+  int n, m, data;
+  cin >> n >> m;
+  vector<int> arr1, arr2;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    arr1.push_back(data);
+  }
+  for(int i = 0; i<m; i++){
+    cin >> data;
+    arr2.push_back(data);
+  }
+  /*for(auto x : arr1){
+    cout << x << " ";
+  }
+  cout << endl;
+  for(auto i : arr2){
+    cout << i << " ";
+  }*/
+  vector<int> res = relativeSortArray(arr1, arr2);
+  for(auto x : res){
+    cout << x << " ";
+  }
+}
