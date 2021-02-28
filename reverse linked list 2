@@ -1,0 +1,99 @@
+https://leetcode.com/problems/reverse-linked-list-ii/
+#include<bits/stdc++.h>
+using namespace std; 
+class Node{
+  public:
+  int val;
+  Node *next;
+};
+Node *head;
+Node *gethead(Node **h, int data){
+  Node *temp = new Node();
+  temp->val = data;
+  temp->next = NULL;
+  Node *prev = *h;
+  if(*h == NULL){
+    *h = temp;
+    prev = temp;
+  }
+  else{
+    while(prev != NULL){
+      if(prev->next == NULL){
+        prev->next = temp;
+        prev = temp;
+      }
+      prev = prev->next;
+    }
+  }
+  return *h;
+}
+void display(Node *p){
+  if(p == NULL){
+    cout << "List is empty" << endl;
+  }
+  Node *x = p;
+  int n = 1;
+  while(x != NULL){
+    cout << "Data in node " << n << " : " << x->val << endl;
+    x = x->next;
+    n++;
+  }
+}
+Node *reverse(Node *r){
+  Node *curr = r;
+  Node *prev = NULL,*next = NULL;
+  while(curr != NULL){
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+  }
+  return prev;
+}
+Node *reverseBetween(Node *head, int left, int right){
+  if(left == right){
+    return head;
+  }
+  Node *revs = NULL, *revs_prev = NULL; // revs is the start node from where the reverse process will start , revs_prev is a node before revs.
+  Node *revend = NULL, *revend_next = NULL; // revend is the end node at which the reverse process will end, revend_next is a node after revend_next.
+  int i = 0;
+  Node *curr = head;
+  while(curr != NULL && i<=right){
+    if(i < left){
+      revs_prev = curr;
+    }
+    if(i == left) {
+      revs = curr;
+    }
+    if(i == right){
+      revend = curr;
+      revend_next = curr->next;
+    }
+    curr = curr->next;
+    i++;
+  }
+  revend->next = NULL; // break the connection of the last node which is to be reversed.
+  revend = reverse(revs);
+
+  if(revs != head){ // if the starting position is not head then (revs_prev->next = revend)
+    revs_prev->next = revend;
+  }
+  else{
+    head = revend;
+  }
+  revs->next = revend_next;
+  return head;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    gethead(&head, data);
+  }
+  display(head);
+  int left, right;
+  cin >> left >> right;
+  reverseBetween(head, left, right);
+  display(head);
+}
