@@ -11,7 +11,7 @@ string longestPalindrome(string str)
 	int low, high;
 
 
-	for (int i = 1; i < len; ++i) { // centre points are i-1 and i for longest substring of even length.
+	for (int i = 1; i < len; ++i) { // centre points are i-1 and i for longest substring of even length, as even length palindrome has 2 midponts.
 
 		low = i - 1;
 		high = i;
