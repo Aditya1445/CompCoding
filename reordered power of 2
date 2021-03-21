@@ -1,0 +1,26 @@
+// https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/590/week-3-march-15th-march-21st/3679/
+// logic : convert the given nuber in string, then sort it to get the sorted order of string . now iterate from 0 to 29(<30)**. store the power of 2 in variable and convert it into
+// string and then sort it in increaing order . if that string matches with the initial one then return true, else false.
+#include<bits/stdc++.h>
+using namespace std;
+
+bool powerOf2(int N){
+  int p;
+  string str = to_string(N);
+  sort(str.begin(), str.end());
+  for(int i = 0; i<30; i++){
+    p = (1 << i);
+    string a = to_string(p);
+    sort(a.begin(), a.end());
+    if(str == a){
+      return true;
+    }
+  }
+  return false;
+}
+int main(){
+  int N;
+  cin >> N;
+  cout << boolalpha << powerOf2(N);
+} 
+// **  we only iterate upto 29 as 2^30 will overpass the constraint 
