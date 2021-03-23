@@ -1,0 +1,38 @@
+// https://leetcode.com/explore/challenge/card/march-leetcoding-challenge-2021/591/week-4-march-22nd-march-28th/3682/
+#include<bits/stdc++.h>
+using namespace std;
+
+int threeSumMulti(vector<int>& arr, int target){
+  unordered_map<int, long> freq;
+  for(int i : arr){
+    freq[i]++;
+  }
+  long res = 0;
+  for(auto it : freq){
+    for(auto it2 : freq){
+      int i = it.first, j = it2.first, k = target - i - j;
+      if(!freq.count(k)){continue;}
+      if(i == j && j == k){
+        res += freq[i] * (freq[i] - 1) * (freq[i] - 2) / 6;
+      }else if(i == j && j != k){
+        res += freq[i] * (freq[i] - 1) / 2  * freq[k];
+      }else if(i < j && j < k){
+        res += freq[i] * freq[j] * freq[k];
+      }
+    }
+  }
+  return res % int(1e9 + 7); 
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> arr;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    arr.push_back(data);
+  }
+  int target;
+  cin >> target;
+  int ans = threeSumMulti(arr, target);
+  cout << ans;
+}
