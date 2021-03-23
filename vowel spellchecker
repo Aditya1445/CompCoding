@@ -1,0 +1,72 @@
+https://leetcode.com/problems/vowel-spellchecker/
+#include<bits/stdc++.h>
+using namespace std;
+
+bool isvowel(char ch){
+  if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'){
+    return true;
+  }else{
+    return false;
+  }
+}
+vector<string> spellChecker(vector<string>& wordlist, vector<string>& queries){
+  unordered_set<string> words;
+  unordered_map<string, string> vowels;
+  unordered_map<string, string> nocase;
+  vector<string> res(queries.size(), "");
+  for(int i = 0; i<wordlist.size(); i++){
+    words.insert(wordlist[i]);
+    string temp = wordlist[i];
+    transform(temp.begin(), temp.end(), temp.begin(), ::tolower);
+    if(nocase.find(temp) == nocase.end()){
+      nocase[temp] = wordlist[i];
+    }
+    for(auto &ch : temp){
+      if(isvowel(ch)){
+        ch = '#';
+      }
+    }
+    if(vowels.find(temp) == vowels.end()){
+      vowels[temp] = wordlist[i];
+    }
+  } 
+  for(int i = 0; i<queries.size(); i++){
+    string check = queries[i];
+    transform(check.begin(), check.end(), check.begin(), ::tolower);
+    if(words.find(queries[i]) != words.end()){
+      res[i] = queries[i];
+    }
+    else if(nocase.find(check) != nocase.end()){
+      res[i] = nocase[check];
+    }
+    else{
+      for(auto &ch : check){
+        if(isvowel(ch)){
+          ch = '#';
+        }
+      }
+    }
+    if(vowels.find(check) != vowels.end()){
+      res[i] = vowels[check];
+    }
+  }
+  return res;
+}
+int main(){
+  int n, m;
+  cin >> n >> m;
+  vector<string> wordlist, queries;
+  string s;
+  for(int i = 0; i<n; i++){
+    cin >> s;
+    wordlist.push_back(s);
+  }
+  for(int j = 0; j<m; j++){
+    cin >> s;
+    queries.push_back(s);
+  }
+  vector<string> ans = spellChecker(wordlist, queries);
+  for(string j : ans){
+    cout << j << endl;
+  }
+}
