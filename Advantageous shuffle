@@ -1,0 +1,32 @@
+https://leetcode.com/problems/advantage-shuffle/
+// logic : we use multiset in order to store the element of A, and then we traverse B such that for each B[i] we select the smallest element in A which is 
+// greater than B[i], if there are no such number then we select the smallest number in A , and after we delete that number from set.
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> advantageCount(vector<int>& A, vector<int>& B){
+  multiset<int> s(A.begin(), A.end());
+  for(int i = 0; i<B.size(); i++){
+    auto it = *s.rbegin() > B[i] ? s.upper_bound(B[i]) : s.begin();
+    A[i] = *it;
+    s.erase(it);
+  }
+  return A;
+}
+int main(){
+  int n, data;
+  cin >> n;
+  vector<int> A, B;
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    A.push_back(data);
+  }
+  for(int i = 0; i<n; i++){
+    cin >> data;
+    B.push_back(data);
+  }
+  vector<int> res = advantageCount(A, B);
+  for(int i : res){
+    cout << i << " ";
+  }
+}
