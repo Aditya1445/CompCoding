@@ -1,0 +1,21 @@
+// https://leetcode.com/problems/calculate-money-in-leetcode-bank/
+#include<bits/stdc++.h>
+using namespace std;
+
+int totalMoney(int n){
+  int m = n/7; // calculate number of weeks.
+  int sum = 0;
+  for(int i = 1; i<=m; i++){ // for week 1 : coins will be 1 2 3 4 5 6 7 = 28 (i.e 7*(i+3)) and for week 2 : coins will be 2 3 4 5 6 7 8 = 35 (again 7*(i+3))
+    sum += 7*(i+3);
+  }
+  for(int j = 7*m; j<n; j++){ calculate number of remaining days
+    sum += ++m; // with increase in  day coins also increase.
+  }
+  return sum;
+}
+int main(){
+  int n;
+  cin >> n;
+  int money = totalMoney(n);
+  cout << money;
+}
