@@ -1,0 +1,31 @@
+// https://leetcode.com/problems/palindromic-substrings/
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int expandstring(string s, int low, int hi){
+  int counter = 0;
+  while(low >= 0 && hi < s.size()&& s[low] == s[hi]){
+    counter++;
+    low--, hi++;
+  }
+   return counter;
+}
+int countSubstring(string s){
+  int count = 0;
+  if(s.size() == 0){
+    return 0;
+  }
+  for(int i = 0; i<s.size(); i++){
+    count += expandstring(s, i, i);
+    count += expandstring(s, i, i+1);
+  }
+  return count;
+}
+
+int main(){
+  string s;
+  getline(cin, s);
+  int count = countSubstring(s);
+  cout << count;
+}
